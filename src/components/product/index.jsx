@@ -15,7 +15,7 @@ const Product = ({ product }) => {
           <p className="name">{item.name}</p>
           <img style={{ width: "100px" }} src={item.image} />
           <div className="price">
-            {item.saleOffPrice.toLocaleString("en-US")} VNĐ
+            {item.saleOffPrice} VNĐ
           </div>
         </div>
       ))}

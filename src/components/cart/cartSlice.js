@@ -6,20 +6,29 @@ const cartSlice = createSlice({
     cart: [],
     total: 0,
   },
+
   reducers: {
     add: (state, action) => {
-      const exitsProduct = state.cart.find((item) => item.id === action.payload.id);
-      if (!exitsProduct) {
-        state.cart.push(action.payload);
-      } else {
+      // IMMMER
+      // Mutable => Immutable
+      const Product = state.cart.find((item) => item.id === action.payload.id);
+      if (Product) {
         exitsProduct.amount += 1;
+      } else {
+        state.cart.push(action.payload);
       }
-      state.total = state.cart.reduce((accu, item) => accu + item.saleOffPrice * item.amount,0)
+      state.total = state.cart.reduce(
+        (accu, item) => accu + item.saleOffPrice * item.amount,
+        0
+      );
     },
     increase: (state, action) => {
       let currentItem = state.cart.find((c) => c.id == action.payload);
       currentItem.amount++;
-      state.total = state.cart.reduce((accu, item) => accu + item.saleOffPrice * item.amount,0)
+      state.total = state.cart.reduce(
+        (accu, item) => accu + item.saleOffPrice * item.amount,
+        0
+      );
     },
     decrease: (state, action) => {
       let currentItem = state.cart.find((c) => c.id == action.payload);
@@ -35,7 +44,10 @@ const cartSlice = createSlice({
           currentItem.amount = 1;
         }
       }
-      state.total = state.cart.reduce((accu, item) => accu + item.saleOffPrice * item.amount,0)
+      state.total = state.cart.reduce(
+        (accu, item) => accu + item.saleOffPrice * item.amount,
+        0
+      );
     },
   },
 });
